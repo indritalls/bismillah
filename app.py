@@ -1,5 +1,4 @@
 from flask import Flask, request, abort
-
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -7,14 +6,22 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+#tambahkan ini#########################
+import requests
+import json
+url = "https://api.kawalcorona.com/indonesia/"
+response = requests.get(url)
+parsed = response.json()[0]
+negara = parsed["name"]
+positif = parsed["positif"]
+sembuh = parsed["sembuh"]
+meninggal = parsed["meninggal"]
+########################################
 app = Flask(__name__)
-
 # Channel Access Token
 line_bot_api = LineBotApi('GUw/Sdi+cGaiCtLq8ZdrYaOMTLk4K1Tc6R0DRiEH/vBqQljRKQ3pJq+oN1sYKNSeSqIPRMJS/H1sBEBIJuxLat77L1VtPgRBnssLOC48ICWaIEk1f9oixGL+aeqgL7mEe6hjk7HUwjSAqjdLBeQA0gdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
 handler = WebhookHandler('923c01d65919b7ae347b0749bde3bb6d')
-
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -29,15 +36,29 @@ def callback():
     except InvalidSignatureError:
         abort(400)
     return 'OK'
-
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg_from_user = event.message.text
     if msg_from_user == 'Data-covid':
-    message = TextSendMessage(text='Hello, world')
-    line_bot_api.reply_message(event.reply_token, message)
+    	message = TextSendMessage("Data COVID-19 " + negara + "\nPositif: " + positif + "\nSembuh: " + sembuh + "\nMeninggal: " + meninggal)
+    	line_bot_api.reply_message(event.reply_token, message)
+        
+    if msg_from_user == 'kuis':
+        message = TextSendMessage("Mau pilih truth atau dare?" + "\nPilih 1 untuk truth" + "\nPilih 2 untuk dare")
+        line_bot_api.reply_message(event.reply_token, message)
+        
+    if msg_from_user == 'satu':
+        message = TextSendMessage("Pernah ga kabur dari rumah? coba ceritain ke temenmu!" + "\nKalau gamau jawab silahkan ketik 'gabisa' untuk melihat hukuman kamu")
+        line_bot_api.reply_message(event.reply_token, message)
 
+    if msg_from_user == 'gabisa':
+        message = TextSendMessage("hukuman kamu adalah:" +"\nChat mantan kamu bilang maaf" + "\nAtau kalau gabisa atau gapunya mantan, traktir temen kamu kopi")
+        message = TextSendMessage("hukuman kamu adalah:" +"\nChat mantan kamu bilang maaf" + "\nAtau kalau gabisa atau gapunya mantan, traktir temen kamu kopi" + "\nKetik 'oke' untuk melanjutkan games ini ke teman kamu")
+        line_bot_api.reply_message(event.reply_token, message)
+
+
+       
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

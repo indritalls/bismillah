@@ -80,11 +80,16 @@ def handle_message(event):
     dare = random.choice(list(d.keys()))
 
 
-    g = {'https://i.pinimg.com/564x/c9/04/87/c904872af76b3e8013fb614c6f5d6853.jpg':1, 
-        'https://i.pinimg.com/564x/70/ce/46/70ce46df1f2d280c79bf4fd59dc5f9ac.jpg':2,
-        'https://i.pinimg.com/564x/85/24/99/8524995c523e066019646fc7d88b994f.jpg' :3,
-        'https://i.pinimg.com/564x/23/21/e0/2321e08e70e0ffd054c6453f1fb6f076.jpg':4,
-        'https://i.pinimg.com/564x/cc/e1/3a/cce13a149ebe97d6b8883fbcd20cb054.jpg':5,
+    g = {'https://i.pinimg.com/564x/d4/d0/4c/d4d04ca608a791e769fcef88c2435d6b.jpg':1, 
+        'https://i.pinimg.com/564x/d5/00/4f/d5004fa2ded59ce5285a1eb7b9f00576.jpg':2,
+        'https://i.pinimg.com/564x/53/ac/45/53ac458033d5f840800df3cd0b2ff55e.jpg' :3,
+        'https://i.pinimg.com/564x/e4/4d/2b/e44d2b46ace72839f413ecd2505acd3d.jpg':4,
+        'https://i.pinimg.com/564x/1e/13/53/1e13536611cda462baa82113f9cadb3c.jpg':5,
+        'https://i.pinimg.com/564x/9a/b7/6a/9ab76a96e274ebf97a1b74e53ae99a70.jpg':6,
+        'https://i.pinimg.com/564x/76/10/1a/76101ab14bace1803bb37988c825e42a.jpg':7,
+        'https://i.pinimg.com/564x/fe/61/5c/fe615cf92a1c99bfce7302adc44f4379.jpg':8,
+        'https://i.pinimg.com/564x/d4/b7/3f/d4b73f7c2c470b02f1f1c3417fe616f7.jpg':9,
+        'https://i.pinimg.com/564x/80/b6/c8/80b6c83d13ad4401ae92add70c393324.jpg':10,
         }
     gambar = random.choice(list(g.keys()))
 
@@ -136,7 +141,7 @@ def handle_message(event):
         event.reply_token,
         ImageSendMessage(
             original_content_url=gambar,
-            preview_image_url='https://i.pinimg.com/236x/88/a8/ee/88a8eec5497b774af25910cd23b3f2ea.jpg'))
+            preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'))
 
 import os
 if __name__ == "__main__":

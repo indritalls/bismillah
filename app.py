@@ -30,9 +30,8 @@ def callback():
         abort(400)
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    t = {'Kalau kamu bisa jadi tidak terlihat, apa hal pertama yang akan kamu lakukan?':1, 
+
+t = {'Kalau kamu bisa jadi tidak terlihat, apa hal pertama yang akan kamu lakukan?':1, 
         'Apa rahasia yang kamu sembunyikan dari orangtuamu?':2,
         'Siapa orang yang diam-diam kamu sukai?' :3,
         'Siapa orang terakhir yang kamu kepoin di media sosial?':4,
@@ -42,7 +41,7 @@ def handle_message(event):
         'Siapa orang yang paling sering kamu chat?':8,
         'Apa kebohongan terbesar yang pernah kamu katakan kepada orangtuamu?':9,
         'Apa mimpi paling aneh yang pernah kamu alami?':10,
-        'Ceritakan detail ciuman pertamamu…':11,
+        'Ceritakan detail ciuman pertamamu!':11,
         'Kapan terakhir kali kamu ngompol atau eek di celana?':12,
         'Menurutmu, hewan apa yang terlihat paling mirip denganmu?':13,
         'Di antara temanmu, siapa orang yang paling kamu suka dalam konteks romantis?':15,
@@ -53,10 +52,10 @@ def handle_message(event):
         'Apa aib yang kamu sembunyikan dari teman-temanmu?':19,
         'Berapa jumlah mantanmu? sebutkan!':20,
         }
-    tth = random.choice(list(t.keys()))
+tth = random.choice(list(t.keys()))
 
 
-    d = {'Lakukan rap gaya bebas selama 3 menit!':1, 
+d = {'Lakukan rap gaya bebas selama 3 menit!':1, 
         'Biarkan orang lain membuat status menggunakan akun sosial mediamu!':2,
         'Berikan ponselmu kepada salah satu di antara kita dan biarkan orang tersebut mengirim satu pesan kepada siapapun yang dia mau!' :3,
         'Cium salah satu kaus kaki di antara temanmu!':4,
@@ -77,10 +76,10 @@ def handle_message(event):
         'Tunjukkan gerakan dance terbaikmu!':19,
         'Parodikan adegan di film India kesukaanmu!':20,
         }
-    dare = random.choice(list(d.keys()))
+dare = random.choice(list(d.keys()))
 
 
-    g = {'https://i.pinimg.com/564x/d4/d0/4c/d4d04ca608a791e769fcef88c2435d6b.jpg':1, 
+g = {'https://i.pinimg.com/564x/d4/d0/4c/d4d04ca608a791e769fcef88c2435d6b.jpg':1, 
         'https://i.pinimg.com/564x/d5/00/4f/d5004fa2ded59ce5285a1eb7b9f00576.jpg':2,
         'https://i.pinimg.com/564x/53/ac/45/53ac458033d5f840800df3cd0b2ff55e.jpg' :3,
         'https://i.pinimg.com/564x/e4/4d/2b/e44d2b46ace72839f413ecd2505acd3d.jpg':4,
@@ -91,9 +90,9 @@ def handle_message(event):
         'https://i.pinimg.com/564x/d4/b7/3f/d4b73f7c2c470b02f1f1c3417fe616f7.jpg':9,
         'https://i.pinimg.com/564x/80/b6/c8/80b6c83d13ad4401ae92add70c393324.jpg':10,
         }
-    gambar = random.choice(list(g.keys()))
+gambar = random.choice(list(g.keys()))
 
-    s = {52002734:1, 
+s = {52002734:1, 
         52002735:2,
         52002736:3,
         52002737:4,
@@ -101,40 +100,32 @@ def handle_message(event):
         52002740:6,
         52002748:7,
         52002745:8}
-    stiker = random.choice(list(s.keys()))
+stiker = random.choice(list(s.keys()))
 
-    msg_from_user = event.message.text
-    if msg_from_user == 'Tes gambar':
-        line_bot_api.reply_message(
-        event.reply_token,
-        ImageSendMessage(
-            original_content_url='https://1.bp.blogspot.com/-eaDZ7sDP9uY/Xhwqlve5SUI/AAAAAAABXBo/EcI2C2vim7w2WV6EYy3ap0QLirX7RPohgCNcBGAsYHQ/s400/pose_syanikamaeru_man.png',
-            preview_image_url='https://1.bp.blogspot.com/-eaDZ7sDP9uY/Xhwqlve5SUI/AAAAAAABXBo/EcI2C2vim7w2WV6EYy3ap0QLirX7RPohgCNcBGAsYHQ/s400/pose_syanikamaeru_man.png'))
+emoji = [
+            {
+                "index": 0,
+                "productId": "5ac1bfd5040ab15980c9b435",
+                "emojiId": "068"
+            },
+            {
+                "index": 78,
+                "productId": "5ac1bfd5040ab15980c9b435",
+                "emojiId": "002"
+            }
+        ]
 
-    if msg_from_user == 'mulai':
-        message = TextSendMessage("Disini saya akan menampilkan peraturan selama games berlangsung" +
-        "\nPertama kamu akan disuruh memilih truth atau dare, Setelah memilih kamu diharuskan melakukan perintah yang sudah diberikan." + 
-        "\nJika tidak berhasil melakukan perintah dengan benar, maka akan muncul hukuman yang harus dijalani oleh peserta " + 
-        "\n"+ "\n"
-        "Kamu Mau pilih truth atau dare?" + 
-        "\nketik 'truth' untuk memulai games truth" + 
-        "\nketik 'dare' untuk memulai games dare")
-        line_bot_api.reply_message(event.reply_token, message)
-        
+
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    msg_from_user = event.message.text        
     if msg_from_user == 'truth':
-        message = TextSendMessage(tth + "\n" + "Apakah bisa menjawabnya? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
+        message = TextSendMessage(tth + "\n" + "\n" + "Apakah bisa menjawabnya? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
         line_bot_api.reply_message(event.reply_token, message)
 
     if msg_from_user == 'dare':
-        message = TextSendMessage(dare + "\n" + "Apakah bisa melakukan tantangan ini? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
+        message = TextSendMessage(dare + "\n" + "\n" + "Apakah bisa melakukan tantangan ini? Ketik 'bisa' jika memang bisa dan ketik 'gabisa' jika tidak mampu melakukannya")
         line_bot_api.reply_message(event.reply_token, message)
-        
-    if msg_from_user == 'bisa':
-        line_bot_api.reply_message(
-        event.reply_token,
-        StickerSendMessage(
-            package_id='11537',
-            sticker_id=stiker))
 
     if msg_from_user == 'gabisa':
         line_bot_api.reply_message(
@@ -142,22 +133,22 @@ def handle_message(event):
         ImageSendMessage(
             original_content_url=gambar,
             preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'))
-        
-    emoji = [
-            {
-                "index": 0,
-                "productId": "5ac1bfd5040ab15980c9b435",
-                "emojiId": "001"
-            },
-            {
-                "index": 13,
-                "productId": "5ac1bfd5040ab15980c9b435",
-                "emojiId": "002"
-            }
-        ]   
-    if msg_from_user == 'emot':
-        message = TextSendMessage(text='$ LINE emoji $', emojis=emoji)
+           
+    if msg_from_user == 'berhenti':
+        message = TextSendMessage(text='$ Terimakasih sudah menggunakan akun bot ini, semoga hari anda menyenangkan $', emojis=emoji)
         line_bot_api.reply_message(event.reply_token, message)
+    
+    if msg_from_user == 'stop':
+        message = TextSendMessage(text='Terimakasih sudah menggunakan akun bot ini, semoga hari anda menyenangkan', emojis=emoji)
+        line_bot_api.reply_message(event.reply_token, message)
+    
+    if msg_from_user == 'aturan':
+        line_bot_api.reply_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url='https://i.pinimg.com/564x/53/25/ea/5325eab320dc87fcc72754708983abd4.jpg',
+            preview_image_url='https://i.pinimg.com/564x/53/25/ea/5325eab320dc87fcc72754708983abd4.jpg'))
+
 
 import os
 if __name__ == "__main__":

@@ -106,21 +106,13 @@ emoji = [
             {
                 "index": 0,
                 "productId": "5ac1bfd5040ab15980c9b435",
-                "emojiId": "068"
+                "emojiId": "001"
             },
             {
                 "index": 78,
                 "productId": "5ac1bfd5040ab15980c9b435",
                 "emojiId": "002"
             }
-        ]
-
-emoji1 = [
-            {
-                "index": 0,
-                "productId": "5ac1bfd5040ab15980c9b435",
-                "emojiId": "068"
-            },
         ]
 
 @handler.add(MessageEvent, message=TextMessage)
@@ -142,7 +134,7 @@ def handle_message(event):
             preview_image_url='https://i.pinimg.com/564x/40/1e/cf/401ecf89c1d2cbac56d26cc95c3f9fb2.jpg'))
            
     if msg_from_user == 'berhenti':
-        message = TextSendMessage(text='$ Terimakasih sudah menggunakan akun bot ini, semoga hari anda menyenangkan', emojis=emoji1)
+        message = TextSendMessage(text='$ Terimakasih sudah menggunakan akun bot ini, semoga hari anda menyenangkan', emojis=emoji)
         line_bot_api.reply_message(event.reply_token, message)
     
     if msg_from_user == 'stop':
